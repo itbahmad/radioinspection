@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Station Inspection System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Radio Station Inspection System</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Control Panel -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Data Upload</h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- License File Upload -->
+                        <div class="mb-3">
+                            <label for="licenseFile" class="form-label">License Database (Excel)</label>
+                            <input type="file" class="form-control" id="licenseFile" accept=".xlsx,.xls">
+                            <button type="button" class="btn btn-primary btn-sm mt-2" onclick="uploadLicense()">
+                                Upload License Data
+                            </button>
+                        </div>
+                        
+                        <!-- Inspection File Upload -->
+                        <div class="mb-3">
+                            <label for="inspectionFile" class="form-label">Inspection Database (Excel)</label>
+                            <input type="file" class="form-control" id="inspectionFile" accept=".xlsx,.xls">
+                            <button type="button" class="btn btn-success btn-sm mt-2" onclick="uploadInspection()">
+                                Upload Inspection Data
+                            </button>
+                        </div>
+
+                        <!-- Load Sample Data -->
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-info btn-sm" onclick="loadSampleData()">
+                                Load Sample Data
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5>Statistics</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="stats">
+                            <p>No data loaded yet</p>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="refreshStats()">
+                            Refresh Stats
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Map Controls -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5>Map Controls</h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-warning btn-sm mb-2" onclick="loadMapData()">
+                            Load Map Data
+                        </button>
+                        <br>
+                        <small class="text-muted">Upload data first, then click to visualize on map</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Container -->
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Interactive Map</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="map" style="height: 600px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Messages -->
+    <div id="messages" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
